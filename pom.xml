@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
     <groupId>lk.ijse.cms</groupId>
-    <artifactId>service-doctor</artifactId>
+    <artifactId>doctor-service</artifactId>
     <version>1.0.0</version>
     <name>Doctor-Service</name>
     <description>Doctor Microservice for Clinic Management System</description>
@@ -24,6 +24,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
         <!-- Spring Boot Web & Data MongoDB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
