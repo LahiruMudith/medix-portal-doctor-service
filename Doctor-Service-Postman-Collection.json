@@ -1,0 +1,149 @@
+{
+  "info": {
+    "_postman_id": "doctor-service-uuid-2",
+    "name": "Doctor Service API",
+    "description": "Postman Collection for testing the Doctor-Service directly (port 8001) or via API Gateway (port 7000). Connects to MongoDB catalog.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register Doctor",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();",
+              "if (jsonData.doctorId) {",
+              "    pm.globals.set(\"last_doctor_id\", jsonData.doctorId);",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dr. Jane Watson\",\n  \"specialization\": \"Pediatrician\",\n  \"qualifications\": \"MBBS, MD (Peds)\",\n  \"contactNumber\": \"0777123456\",\n  \"email\": \"dr.jane@medix.com\",\n  \"availableDays\": [\n    \"Monday\",\n    \"Wednesday\",\n    \"Friday\"\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/doctors",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "doctors"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Doctors",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/doctors",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "doctors"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Doctor by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/doctors/{{last_doctor_id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "doctors",
+            "{{last_doctor_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Doctor Profile",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Dr. Jane Watson Perera\",\n  \"specialization\": \"Chief Pediatrician\",\n  \"qualifications\": \"MBBS, MD, FRCP\",\n  \"contactNumber\": \"0777999888\",\n  \"email\": \"dr.jane.p@medix.com\",\n  \"availableDays\": [\n    \"Monday\",\n    \"Wednesday\",\n    \"Thursday\",\n    \"Friday\"\n  ]\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/doctors/{{last_doctor_id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "doctors",
+            "{{last_doctor_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Doctor",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/doctors/{{last_doctor_id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "doctors",
+            "{{last_doctor_id}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8001",
+      "type": "string"
+    }
+  ]
+}
